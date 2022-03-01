@@ -10,8 +10,7 @@ client.setReconnectDelay(1000)
 
 /** Module to control application life. */
 const app = electron.app;
-
-/** Module to create native browser window.*/
+/* Module to create native browser window.*/
 const BrowserWindow = electron.BrowserWindow;
 
 /** Module for receiving messages from the BrowserWindow */

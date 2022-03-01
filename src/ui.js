@@ -45,7 +45,17 @@ let ui = {
 
 	actval: document.getElementById('Actuator'),
 
+	backRpm: document.getElementById('back-rpm'),
 
+	frontRpm: document.getElementById('front-rpm'),
+
+	frontTarget: document.getElementById('front-target'),
+
+	backTarget: document.getElementById('back-target'),
+
+	shot: document.getElementById('description'),
+
+	shooterIndex: document.getElementById('index'),
 
 	// Photo Eyes 
 	midconvey: document.getElementById('Mid-Convey'),
@@ -102,9 +112,14 @@ NetworkTables.addKeyListener('/SmartDashboard/Auton/default', (key, value) => {
 	selectedAuton.value = value;
 });
 
-NetworkTables.addKeyListener('/SmartDashboard/Auton/selected', (key, value) => {
-	setAutonDefault(value.toString());
-	selectedAuton.value = value;
+// NetworkTables.addKeyListener('/SmartDashboard/Auton/selected', (key, value) => {
+// 	setAutonDefault(value.toString());
+// 	selectedAuton.value = value;
+// });
+
+NetworkTables.addKeyListener('/photonvision/C922_Pro_Stream_Webcam/targetPitch', (key, value) => {
+	console.log(`/photonvision/C922_Pro_Stream_Webcam/targetPitch -> ${value}`);
+	ui.targetRPM.textContent = value;
 });
 
 // ========================================================================================
@@ -149,8 +164,8 @@ NetworkTables.addKeyListener('/SmartDashboard/Has Target', (key, value) => {
 	}
 });
 
-NetworkTables.addKeyListener('/SmartDashboard/Angle 1', (key, value) => {	
-	ui.visionAngle1Indicator.textContent = value + "\u00B0";
+NetworkTables.addKeyListener('/SmartDashboard/Target Y Offset', (key, value) => {	
+	ui.visionAngle1Indicator.textContent = Math.round(value * 100) / 100 + "\u00B0";
 });
 
 NetworkTables.addKeyListener('/SmartDashboard/Vision:Angle2InDegrees', (key, value) => {	
@@ -158,9 +173,9 @@ NetworkTables.addKeyListener('/SmartDashboard/Vision:Angle2InDegrees', (key, val
 });
 
 
-NetworkTables.addKeyListener('/SmartDashboard/LL Distance', (key, value) => {	
+NetworkTables.addKeyListener('/SmartDashboard/Limelight Distance', (key, value) => {	
 	if(value < 600 && value != 0) {
-		ui.visionDistanceIndicator.textContent = Math.round((value/12)*10)/10 + "ft";
+		ui.visionDistanceIndicator.textContent = Math.round(value * 10)/10 + "ft";
 		if (value <= 600) {
 			ui.visionDistanceIndicator.style = "background-color:green;";
 		} 
@@ -221,6 +236,31 @@ NetworkTables.addKeyListener('/SmartDashboard/Shooter Sensor Distance', (key, va
 NetworkTables.addKeyListener('/SmartDashboard/Actuator Value', (key, value) =>
 {
 	ui.actval.textContent = Math.round(value * 100) / 100;
+});
+NetworkTables.addKeyListener('/SmartDashboard/Front Motor RPM', (key, value) =>
+{
+	ui.frontRpm.textContent = Math.round(value * 10) / 10;
+});
+NetworkTables.addKeyListener('/SmartDashboard/Back Motor RPM', (key, value) =>
+{
+	ui.backRpm.textContent = Math.round(value * 10) / 10;
+});
+NetworkTables.addKeyListener('/SmartDashboard/Shot Front RPM', (key, value) =>
+{
+	ui.frontTarget.textContent = Math.round(value * 10) / 10;
+});
+NetworkTables.addKeyListener('/SmartDashboard/Shot Back RPM', (key, value) =>
+{
+	ui.backTarget.textContent = Math.round(value * 10) / 10;
+});
+
+NetworkTables.addKeyListener('/SmartDashboard/Shot', (key, value) =>
+{
+	ui.shot.textContent = value;
+});
+NetworkTables.addKeyListener('/SmartDashboard/Shooter Index', (key, value) =>
+{
+	ui.shooterIndex.textContent = Math.round(value * 10) / 10;
 });
 NetworkTables.addKeyListener('/SmartDashboard/Is Normal Shot', (key, value) =>
 {
@@ -306,7 +346,7 @@ NetworkTables.addKeyListener('/SmartDashboard/MID-CONVEYOR', (key, value) =>
 
 NetworkTables.addKeyListener('/SmartDashboard/RPM', (key, value) =>
 {
-	ui.actualRPM.textContent = value * 10;
+	//ui.actualRPM.textContent = value * 10;
 });
 NetworkTables.addKeyListener('/SmartDashboard/Target RPM', (key, value) =>
 {

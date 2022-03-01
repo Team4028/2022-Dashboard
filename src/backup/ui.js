@@ -131,7 +131,11 @@ NetworkTables.addKeyListener('/SmartDashboard/autonomous/modes', (key, value) =>
 });
 
 // Load list of prewritten autonomous modes
-NetworkTables.addKeyListener('/SmartDashboard/autonomous/selected', (key, value) => {
+// NetworkTables.addKeyListener('/SmartDashboard/autonomous/selected', (key, value) => {
+//     ui.autoSelect.value = value;
+// });
+
+NetworkTables.addKeyListener('/photonvision/C922_Pro_Stream_Webcam/targetPitch', (key, value) => {
     ui.autoSelect.value = value;
 });
 
@@ -149,7 +153,7 @@ ui.gyro.container.onclick = function() {
 };
 // Update NetworkTables when autonomous selector is changed
 ui.autoSelect.onchange = function() {
-    NetworkTables.putValue('/SmartDashboard/autonomous/selected', this.value);
+    // NetworkTables.putValue('/SmartDashboard/autonomous/selected', this.value);
 };
 // Get value of arm height slider when it's adjusted
 ui.armPosition.oninput = function() {

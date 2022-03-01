@@ -103,11 +103,11 @@
 			</tr>
 			<tr>
 				<td align="center"><label class="std-label">Distance </label></td>
-				<td align="center"><label class="std-label">Angle 1</label></td>
+				<td align="center"><label class="std-label">Offset </label></td>
 				<td align="center" valign="center" rowspan="2"><div class="vision-indicator" id="visionConnectionIndicator"><b>COMS</b></div></td>
 			</tr>
 			<tr>
-				<td align="center"><div class="vision-indicator" id="visionDistanceIndicator">##in</div></td>
+				<td align="center"><div class="vision-indicator" id="visionDistanceIndicator">##ft</div></td>
 				<td align="center" valign="center"><div class="vision-indicator" id="visionAngle1Indicator">##&#176</div></td>
 			</tr>
 		</table>
@@ -156,15 +156,15 @@
 				<td align="center"><label class="std-label">Shooter Sensor Distance</label>
 			</tr>
 			<tr>
-				<td align="center"><div class="shooter-numbers-but-good" id="shotDistance">##in</div></td>
-				<td align="center"><div class="shooter-numbers-but-good" id="shotOffset">##in</div></td>
-				<td align="center"><div class="shooter-numbers-but-good" id="sensorDist">##in</div></td>
+				<td align="center"><div class="shooter-numbers-but-good" id="shotDistance">##ft</div></td>
+				<td align="center"><div class="shooter-numbers-but-good" id="shotOffset">##°</div></td>
+				<td align="center"><div class="shooter-numbers-but-good" id="sensorDist">##ft</div></td>
 			</tr>
 		</table>
 	</div>
 			
 	
-	<div class="box" id="shooter-rpm-info">
+	<div class="box" id="target-rpm">
 		<table>
 			<colgroup>
 				<col width="130px"/>
@@ -173,12 +173,12 @@
 			</colgroup>
 			
 			<tr>
-				<td align="center"><label class="std-label">Target RPM</label></td>
-				<td align="center"><label class="std-label">RPM</label></td>
+				<td align="center"><label class="std-label">Front Target</label></td>
+				<td align="center"><label class="std-label">Back Target</label></td>
 			</tr>
 			<tr>
-				<td align="center"><div class="shooter-info" id="TargetRPM">##</div></td>
-				<td align="center"><div class="shooter-info" id="ActualRPM">##</div></td>
+				<td align="center"><div class="shooter-info" id="front-target">##</div></td>
+				<td align="center"><div class="shooter-info" id="back-target">##</div></td>
 			</tr>
 		</table>
 	</div>
@@ -243,6 +243,25 @@
 	</div>
 
 
+	<div class="box" id="actual-rpm">
+		<table>
+			<colgroup>
+				<col width="130px"/>
+				<col width="130px"/>
+			</colgroup>
+			<tr>
+			</tr>
+			<tr>
+				<td align="center"><label class="std-label">Front RPM</label></td>
+				<td align="center"><label class="std-label">Back RPM</label></td>
+			</tr>
+			<tr>
+				<td align="center"><div class="shooter-info" id="front-rpm">##</div></td>
+				<td align="center"><div class="shooter-info" id="back-rpm">##</div></td>
+
+			</tr>
+		</table>
+	</div>
 	<div class="box" id="actuator">
 		<table>
 			<colgroup>
@@ -258,6 +277,26 @@
 			<tr>
 				<td align="center"><div class="shooter-info" id="Actuator">##</div></td>
 				<td align="center"><div class="powercellyeet" id="powerCellCount">##</div></td>
+
+			</tr>
+		</table>
+	</div>
+
+	<div class="box" id="shooter-index">
+		<table>
+			<colgroup>
+				<col width="130px"/>
+				<col width="130px"/>
+			</colgroup>
+			<tr>
+			</tr>
+			<tr>
+				<td align="center"><label class="std-label">Shot</label></td>
+				<td align="center"><label class="std-label">Index</label></td>
+			</tr>
+			<tr>
+				<td align="center"><div class="shooter-info" id="description">##</div></td>
+				<td align="center"><div class="shooter-info" id="index">##</div></td>
 
 			</tr>
 		</table>

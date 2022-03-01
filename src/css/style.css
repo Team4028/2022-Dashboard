@@ -326,11 +326,19 @@ Configure Settings for Specific HTML Objects
     height: 130px;
 }
 
-#shooter-rpm-info {
-    
+#target-rpm {
     padding: 0;
     position: fixed;
     top: 375px;
+    left: 0px;
+    width: 220px;
+    height: 110px;
+}
+
+#actual-rpm {
+    padding: 0;
+    position: fixed;
+    top: 605px;
     left: 0px;
     width: 220px;
     height: 110px;
@@ -375,6 +383,17 @@ Configure Settings for Specific HTML Objects
     width: 261px;
     height: 110px;
 }
+
+#shooter-index {
+
+    padding: 0;
+    position: fixed;
+    top: 605px;
+    left: 225px;
+    width: 261px;
+    height: 110px;
+}
+
 #actuator {
 
     padding: 0;
@@ -428,6 +447,7 @@ Configure Settings for Specific HTML Objects
     line-height: 81px;
     font-size: 30px;
 }
+
 .shooter-numbers-but-good {
     width: 95%;
     height: 81px;

@@ -164,7 +164,7 @@ NetworkTables.addKeyListener('/SmartDashboard/Has Target', (key, value) => {
 	}
 });
 
-NetworkTables.addKeyListener('/SmartDashboard/Target Y Offset', (key, value) => {	
+NetworkTables.addKeyListener('/SmartDashboard/Target X Offset', (key, value) => {	
 	ui.visionAngle1Indicator.textContent = Math.round(value * 100) / 100 + "\u00B0";
 });
 

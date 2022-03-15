@@ -12,10 +12,6 @@ const client = new wpilib_NT.Client();
 //     console.error(err);
 // }
 console.log(process.version);
-require('electron-reload')(__dirname, {
-    // Note that the path to electron may vary according to the main file
-    electron: require(`${__dirname}/node_modules/electron`)
-});
 // END DEBUG
 
 // The client will try to reconnect after 1 second

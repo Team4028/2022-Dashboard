@@ -129,12 +129,12 @@
 				<td><legend></legend></td>
 			</tr>
 			<tr>
-				<td align="center"><label class="std-label">Is Normal Shot</label></td>
-				<td align="center"><label class="std-label">Is At Speed</label></td>
+				<td align="center"><label class="std-label">Conveyor</label></td>
+				<td align="center"><label class="std-label">hi</label></td>
 			</tr>
 			<tr>
-				<td align="center"><div class="shooter-indicator" id="Is Alt Shot"></div></td>
-				<td align="center"><div class="shooter-indicator" id="Is At Speed"></div></td>
+				<td align="center"><div class="shooter-indicator" id="Conveyor"></div></td>
+				<td align="center"><div class="shooter-indicator" id="idk"></div></td>
 			</tr>
 		</table>
 	</div>
@@ -143,42 +143,51 @@
 	<div class="box" id="shooter-secondary-groupbox">
 		<table>
 			<colgroup>
-				<col width="100px"/>
-				<col width="100px"/>
-				<col width="100px"/>
+				<col width="150px"/>
+				<col width="150px"/>
 			</colgroup>
 			<tr>
 				<td><legend>Shooter:</legend></td>
 			</tr>
 			<tr>
-				<td align="center"><label class="std-label">Shot Distance</label></td>
-				<td align="center"><label class="std-label">Shooter Offset</label></td>
-				<td align="center"><label class="std-label">Shooter Sensor Distance</label>
+				<td align="center"><label class="std-label">Index</label></td>
+				<td align="center"><label class="std-label">Shot Name</label></td>
 			</tr>
 			<tr>
-				<td align="center"><div class="shooter-numbers-but-good" id="shotDistance">##ft</div></td>
-				<td align="center"><div class="shooter-numbers-but-good" id="shotOffset">##°</div></td>
-				<td align="center"><div class="shooter-numbers-but-good" id="sensorDist">##ft</div></td>
+				<td align="center"><div class="big-index" id="index">##</div></td>
+				<td align="center"><div class="shooter-numbers-but-good" id="shot">##</div></td>
 			</tr>
-		</table>
-	</div>
-			
-	
-	<div class="box" id="target-rpm">
-		<table>
-			<colgroup>
-				<col width="130px"/>
-				<col width="130px"/>
-	
-			</colgroup>
-			
 			<tr>
 				<td align="center"><label class="std-label">Front Target</label></td>
-				<td align="center"><label class="std-label">Back Target</label></td>
+				<td align="center"><label class="std-label">Front RPM</label></td>
 			</tr>
 			<tr>
-				<td align="center"><div class="shooter-info" id="front-target">##</div></td>
-				<td align="center"><div class="shooter-info" id="back-target">##</div></td>
+				<td align="center"><div class="shooter-numbers-but-good" id="front-target">####</div></td>
+				<td align="center"><div class="shooter-numbers-but-good" id="front-rpm">##</div></td>
+			</tr>
+			<tr>
+				<td align="center"><label class="std-label">Back Target</label></td>
+				<td align="center"><label class="std-label">Back RPM</label></td>
+			</tr>
+			<tr>
+				<td align="center"><div class="shooter-numbers-but-good" id="back-target">####</div></td>
+				<td align="center"><div class="shooter-numbers-but-good" id="back-rpm">##</div></td>
+			</tr>
+			<tr>
+				<td align="center"><label class="std-label">Kicker Target</label></td>
+				<td align="center"><label class="std-label">Kicker RPM</label></td>
+			</tr>
+			<tr>
+				<td align="center"><div class="shooter-numbers-but-good" id="kicker-target">####</div></td>
+				<td align="center"><div class="shooter-numbers-but-good" id="kicker-rpm">##</div></td>
+			</tr>
+			<tr>
+				<td align="center"><label class="std-label">Angle Target</label></td>
+				<td align="center"><label class="std-label">Angle</label></td>
+			</tr>
+			<tr>
+				<td align="center"><div class="shooter-numbers-but-good" id="angle-target">##</div></td>
+				<td align="center"><div class="shooter-numbers-but-good" id="angle">##</div></td>
 			</tr>
 		</table>
 	</div>
@@ -210,13 +219,12 @@
 	
 			</colgroup>
 			<tr>
-				<td align="center"><label class="std-label">Pre Convey</label></td>
-				<td align="center"><label class="std-label">Post Singulator</label></td>
-
+				<td align="center"><label class="std-label">FL</label></td>
+				<td align="center"><label class="std-label">FR</label></td>
 			</tr>
 			<tr>
-				<td align="center"><div class="photo-eye-info" id="Pre-Covey"></div></td>
-				<td align="center"><div class="photo-eye-info" id="Post-Singulator"></div></td>
+				<td align="center"><div class="photo-eye-info" id="FL"></div></td>
+				<td align="center"><div class="photo-eye-info" id="FR"></div></td>
 
 			</tr>
 		</table>
@@ -230,77 +238,18 @@
 	
 			</colgroup>
 			<tr>
-				<td align="center"><label class="std-label">Post Conveyor</label></td>
-				<td align="center"><label class="std-label">Mid Conveyor</label></td>
+				<td align="center"><label class="std-label">RL</label></td>
+				<td align="center"><label class="std-label">RR</label></td>
 
 			</tr>
 			<tr>
-				<td align="center"><div class="photo-eye-info" id="Post-Convey"></div></td>
-				<td align="center"><div class="photo-eye-info" id="Mid-Convey"></div></td>
-
-			</tr>
-		</table>
-	</div>
-
-
-	<div class="box" id="actual-rpm">
-		<table>
-			<colgroup>
-				<col width="130px"/>
-				<col width="130px"/>
-			</colgroup>
-			<tr>
-			</tr>
-			<tr>
-				<td align="center"><label class="std-label">Front RPM</label></td>
-				<td align="center"><label class="std-label">Back RPM</label></td>
-			</tr>
-			<tr>
-				<td align="center"><div class="shooter-info" id="front-rpm">##</div></td>
-				<td align="center"><div class="shooter-info" id="back-rpm">##</div></td>
-
-			</tr>
-		</table>
-	</div>
-	<div class="box" id="actuator">
-		<table>
-			<colgroup>
-				<col width="130px"/>
-				<col width="130px"/>
-			</colgroup>
-			<tr>
-			</tr>
-			<tr>
-				<td align="center"><label class="act-Label">Actuator</label></td>
-				<td align="center"><label class="act-Label">Cell Count</label></td>
-			</tr>
-			<tr>
-				<td align="center"><div class="shooter-info" id="Actuator">##</div></td>
-				<td align="center"><div class="powercellyeet" id="powerCellCount">##</div></td>
+				<td align="center"><div class="photo-eye-info" id="RL"></div></td>
+				<td align="center"><div class="photo-eye-info" id="RR"></div></td>
 
 			</tr>
 		</table>
 	</div>
 
-	<div class="box" id="shooter-index">
-		<table>
-			<colgroup>
-				<col width="130px"/>
-				<col width="130px"/>
-			</colgroup>
-			<tr>
-			</tr>
-			<tr>
-				<td align="center"><label class="std-label">Shot</label></td>
-				<td align="center"><label class="std-label">Index</label></td>
-			</tr>
-			<tr>
-				<td align="center"><div class="shooter-info" id="description">##</div></td>
-				<td align="center"><div class="shooter-info" id="index">##</div></td>
-
-			</tr>
-		</table>
-	</div>
     <div id="login">
 		<label>Connection <br/> Login:</label>
 		<button class="login-button" id="usbConnectBtn" disabled>==== USB Connect ==== <br/> [172.22.11.2]</button>

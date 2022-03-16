@@ -326,7 +326,7 @@ Configure Settings for Specific HTML Objects
     height: 130px;
 }
 
-#target-rpm {
+#shooter-groupbox {
     padding: 0;
     position: fixed;
     top: 375px;
@@ -335,23 +335,13 @@ Configure Settings for Specific HTML Objects
     height: 110px;
 }
 
-#actual-rpm {
-    padding: 0;
-    position: fixed;
-    top: 605px;
-    left: 0px;
-    width: 220px;
-    height: 110px;
-}
-
-
 #shooter-secondary-groupbox {
     padding: 0;
     position: fixed;
     top: 210px;
     left: 225px;
     width: 261px;
-    height: 160px;
+    height: 510px;
 }
 
 #infeed-groupbox {
@@ -365,25 +355,6 @@ Configure Settings for Specific HTML Objects
     height: 130px;
 }
 
-#shooter-groupbox {
-
-    padding: 0;
-    position: fixed;
-    top: 375px;
-    left: 225px;
-    width: 261px;
-    height: 110px;
-}
-#intake {
-
-    padding: 0;
-    position: fixed;
-    top: 490px;
-    left: 225px;
-    width: 261px;
-    height: 110px;
-}
-
 #shooter-index {
 
     padding: 0;
@@ -394,7 +365,7 @@ Configure Settings for Specific HTML Objects
     height: 110px;
 }
 
-#actuator {
+#intake {
 
     padding: 0;
     position: fixed;
@@ -450,14 +421,26 @@ Configure Settings for Specific HTML Objects
 
 .shooter-numbers-but-good {
     width: 95%;
-    height: 81px;
+    height: 75px;
+    background-color: #004052;
+    border-radius: 4px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 75px;
+    font-size: 20px;
+}
+
+.big-index {
+    width: 95%;
+    height: 75px;
     background-color: #004052;
     border-radius: 4px;
     text-align: center;
     vertical-align: middle;
     line-height: 81px;
-    font-size: 20px;
+    font-size: 40px;
 }
+
 .singulator-info {
     width: 80%;
     height: 81px;

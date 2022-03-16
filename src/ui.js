@@ -8,14 +8,13 @@ let ui = {
 	openChooserWindowBtn: document.getElementById('openChooserWindowBtn'),
 	
 	// chassis
-
+	fl: document.getElementById('FL'),
+	fr: document.getElementById('FR'),
+	rl: document.getElementById('RL'),
+	rr: document.getElementById('RR'),
+	
 	//climber
 	climberStatus: document.getElementById('climber-status'),
-
-	targetRPM: document.getElementById('TargetRPM'),
-
-	actualRPM: document.getElementById('ActualRPM'),
-	
 
 	//vision
 	visionTargetIndicator: document.getElementById('visionTargetIndicator'),
@@ -37,38 +36,27 @@ let ui = {
 
 	isInfeedRunning : document.getElementById('Infeed'),
 
-	shooterOffset : document.getElementById('shotOffset'),
-
-	shooterDist : document.getElementById('shotDistance'),
-
-	shooterSensorDistance : document.getElementById('sensorDist'),
-
-	actval: document.getElementById('Actuator'),
+	isConveyorRunning : document.getElementById('Conveyor'),
 
 	backRpm: document.getElementById('back-rpm'),
 
 	frontRpm: document.getElementById('front-rpm'),
 
+	kickerRpm: document.getElementById('kicker-rpm'),
+
+	angle: document.getElementById('angle'),
+
 	frontTarget: document.getElementById('front-target'),
 
 	backTarget: document.getElementById('back-target'),
 
-	shot: document.getElementById('description'),
+	kickerTarget: document.getElementById('kicker-target'),
+	
+	angleTarget: document.getElementById('angle-target'),
+
+	shot: document.getElementById('shot'),
 
 	shooterIndex: document.getElementById('index'),
-
-	// Photo Eyes 
-	midconvey: document.getElementById('Mid-Convey'),
-
-	preconvey: document.getElementById('Pre-Covey'),
-
-	postsingulator: document.getElementById('Post-Singulator'),
-	
-	postconvey: document.getElementById('Post-Convey'),
-
-	powerCellCount : document.getElementById('powerCellCount')
-
-
 };
 
 
@@ -233,10 +221,6 @@ NetworkTables.addKeyListener('/SmartDashboard/Shooter Sensor Distance', (key, va
 {
 	ui.shooterSensorDistance.textContent = value;
 });
-NetworkTables.addKeyListener('/SmartDashboard/Actuator Value', (key, value) =>
-{
-	ui.actval.textContent = Math.round(value * 100) / 100;
-});
 NetworkTables.addKeyListener('/SmartDashboard/Front Motor RPM', (key, value) =>
 {
 	ui.frontRpm.textContent = Math.round(value * 10) / 10;
@@ -245,6 +229,14 @@ NetworkTables.addKeyListener('/SmartDashboard/Back Motor RPM', (key, value) =>
 {
 	ui.backRpm.textContent = Math.round(value * 10) / 10;
 });
+NetworkTables.addKeyListener('/SmartDashboard/Kicker Motor RPM', (key, value) =>
+{
+	ui.kickerRpm.textContent = Math.round(value * 10) / 10;
+});
+NetworkTables.addKeyListener('/SmartDashboard/Angle', (key, value) =>
+{
+	ui.angle.textContent = Math.round(value * 10) / 10;
+});
 NetworkTables.addKeyListener('/SmartDashboard/Shot Front RPM', (key, value) =>
 {
 	ui.frontTarget.textContent = Math.round(value * 10) / 10;
@@ -252,6 +244,14 @@ NetworkTables.addKeyListener('/SmartDashboard/Shot Front RPM', (key, value) =>
 NetworkTables.addKeyListener('/SmartDashboard/Shot Back RPM', (key, value) =>
 {
 	ui.backTarget.textContent = Math.round(value * 10) / 10;
+});
+NetworkTables.addKeyListener('/SmartDashboard/Shot Kicker RPM', (key, value) =>
+{
+	ui.kickerTarget.textContent = Math.round(value * 10) / 10;
+});
+NetworkTables.addKeyListener('/SmartDashboard/Actuator Value', (key, value) =>
+{
+	ui.angleTarget.textContent = Math.round(value * 10) / 10;
 });
 
 NetworkTables.addKeyListener('/SmartDashboard/Shot', (key, value) =>
@@ -262,95 +262,70 @@ NetworkTables.addKeyListener('/SmartDashboard/Shooter Index', (key, value) =>
 {
 	ui.shooterIndex.textContent = Math.round(value * 10) / 10;
 });
-NetworkTables.addKeyListener('/SmartDashboard/Is Normal Shot', (key, value) =>
-{
-	if(!value)
-	{
-		ui.isAltShot.style = "background-color:red;";
-		ui.isAltShot.textContent = "Alternate";
-	}
-	else{
-		ui.isAltShot.style = "background-color:green";
-		ui.isAltShot.textContent = "Normal";
-	}
-});
-NetworkTables.addKeyListener('/SmartDashboard/Is Singulator Running', (key, value) =>
+
+NetworkTables.addKeyListener('/SmartDashboard/Singulator/Running', (key, value) =>
 {
 	if(value)
 	{
 		ui.isSingulatorRunning.style = "background-color:green;";
-		ui.isSingulatorRunning.textContent = "Running";
 	}
 	else{
 		ui.isSingulatorRunning.style = "background-color: rgb(173, 9, 9)";
-		ui.isSingulatorRunning.textContent = "No";
 	}
 });
-NetworkTables.addKeyListener('/SmartDashboard/Is Infeed Running', (key, value) =>
+
+NetworkTables.addKeyListener('/SmartDashboard/Singulator/Vbus', (key, value) =>
+{
+	ui.isSingulatorRunning.textContent = value;
+});
+
+NetworkTables.addKeyListener('/SmartDashboard/Infeed/Running', (key, value) =>
 {
 	if(value)
 	{
 		ui.isInfeedRunning.style = "background-color:green;";
-		ui.isInfeedRunning.textContent = "Running";
 	}
 	else{
 		ui.isInfeedRunning.style = "background-color: rgb(173, 9, 9)";
-		ui.isInfeedRunning.textContent = "No";
 	}
 });
-
-NetworkTables.addKeyListener('/SmartDashboard/POST-SINGULATOR', (key, value) =>
+NetworkTables.addKeyListener('/SmartDashboard/Infeed/Vbus', (key, value) =>
 {
-	if(!value)
+	ui.isInfeedRunning.textContent = value;
+});
+NetworkTables.addKeyListener('/SmartDashboard/Conveyor/Running', (key, value) =>
+{
+	if(value)
 	{
-		ui.postsingulator.style = "background-color:green;";
+		ui.isConveyorRunning.style = "background-color:green;";
 	}
 	else{
-		ui.postsingulator.style = "background-color: rgb(173, 9, 9)";
+		ui.isConveyorRunning.style = "background-color: rgb(173, 9, 9)";
 	}
 });
-
-NetworkTables.addKeyListener('/SmartDashboard/PRE-SHOOTER SENSOR', (key, value) =>
+NetworkTables.addKeyListener('/SmartDashboard/Conveyor/Vbus', (key, value) =>
 {
-	if(!value)
-	{
-		ui.postconvey.style = "background-color:green;";
-	}
-	else{
-		ui.postconvey.style = "background-color: rgb(173, 9, 9)";
-	}
+	ui.isConveyorRunning.textContent = value;
 });
 
-NetworkTables.addKeyListener('/SmartDashboard/PRE-CONVEYOR SENSOR', (key, value) =>
+NetworkTables.addKeyListener('/SmartDashboard/FL Angle', (key, value) =>
 {
-	if(!value)
-	{
-		ui.preconvey.style = "background-color:green;";
-	}
-	else{
-		ui.preconvey.style = "background-color: rgb(173, 9, 9)";
-	}
+	ui.fl.textContent = Math.round(value * 10) / 10;
 });
 
-NetworkTables.addKeyListener('/SmartDashboard/MID-CONVEYOR', (key, value) =>
+NetworkTables.addKeyListener('/SmartDashboard/FR Angle', (key, value) =>
 {
-	if(!value)
-	{
-		ui.midconvey.style = "background-color:green;";
-	}
-	else{
-		ui.midconvey.style = "background-color: rgb(173, 9, 9)";
-	}
+	ui.fr.textContent = Math.round(value * 10) / 10;
 });
 
-
-NetworkTables.addKeyListener('/SmartDashboard/RPM', (key, value) =>
+NetworkTables.addKeyListener('/SmartDashboard/RL Angle', (key, value) =>
 {
-	//ui.actualRPM.textContent = value * 10;
+	ui.rl.textContent = Math.round(value * 10) / 10;
 });
-NetworkTables.addKeyListener('/SmartDashboard/Target RPM', (key, value) =>
+
+NetworkTables.addKeyListener('/SmartDashboard/RR Angle', (key, value) =>
 {
-	ui.targetRPM.textContent = value * 10;
+	ui.rr.textContent = Math.round(value * 10) / 10;
 });
 
 

@@ -5,15 +5,6 @@ const electron = require('electron');
 const wpilib_NT = require('wpilib-nt-client');
 const client = new wpilib_NT.Client();
 
-// DEBUG: NOTE TO SELF, REMOVE, THX
-// try {
-// 	require('electron-reloader')(module, {});
-// } catch (err) {
-//     console.error(err);
-// }
-console.log(process.version);
-// END DEBUG
-
 // The client will try to reconnect after 1 second
 client.setReconnectDelay(1000)
 

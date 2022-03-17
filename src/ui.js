@@ -1,80 +1,46 @@
-/*
-	Some notes regarding the style at play here. Remove this blurb before merge.
-
-	- Simple true/false conditionals that involve the setting of a variable use ternary operators.
-		I personally prefer using them, as they are shorter and neater.
-		Peruse online Javascript documentation if you have trouble what exactly a ternary operator does.
-		Essentially, this block of code;
-			```
-			var x = True ? 'Hello world!' : 'Goodbye world...';
-			console.log(x); // Will print "Hello world!"
-			```
-		is *exactly* the same as:
-			```
-			var x;
-			if (True) {
-				x = 'Hello world!';
-			} else {
-				x = 'Goodbye world...';
-			}
-			```
-	- Single quotes (') are used instead of double quotes (") where possible.
-		Pure personal preference.
-	- Listener addition lines that heavily use a consistent event pattern and involve similar elements
-		were condensed into arrays of element "identifiers" and "forEach(x => ...)"
-	- LINES PROPERLY END WITH SEMICOLONS (where it makes sense, and syntax-adherent,)BECAUSE NOT DOING SO
-		IS THE FASTEST WAY TO CREATE INCONSISTENT JAVASCRIPT CODE
-		https://www.trivialdiscourse.com/front-end%20development/2021/05/17/semicolons-in-javascript.html
-		https://stackoverflow.com/questions/537632/should-i-use-semicolons-in-javascript
-	- If a value was constantly reused (...so, the "positive/negative" background color styles),
-		it was made a variable.
-	- Rules for the wildcard comments sprinkled around;
-		- *: Placeholder
-		- [*]: Placeholder that specifies exactly how many characters it will be replaced with. One asterisk means one character.
-			- Example: [**] is two characters, that can represent our array ['AA', 'BB', 'CC'].
-		- [*?]: Placeholder that will be replaced with an unknown number of characters. Equivalent to the first case, and
-			only really used for readability.
-	- "Section" comments use exactly ten equal signs, five around both the beginning and end of the section name.
-	- All comments adhere to loose English grammar where it makes sense (start with capital letter, end with a period/exclamation mark)
-	- Unused variables should either not exist or be replaced with an underscore (_)
-*/
-
 // Define UI elements.
 let ui = {
 	fmsDebugMsg: document.getElementById('fmsDebugMsg'),
 	robotCodeBuild: document.getElementById('robotCodeBuild'),
 	robotScanTime: document.getElementById('robotScanTime'),
+
 	// Auton selectors.
 	openChooserWindowBtn: document.getElementById('openChooserWindowBtn'),
+
 	// Chassis.
 	fl: document.getElementById('FL'),
 	fr: document.getElementById('FR'),
 	rl: document.getElementById('RL'),
 	rr: document.getElementById('RR'),
+
 	// Climber.
 	climberStatus: document.getElementById('climber-status'),
+
 	// Vision.
 	visionTargetIndicator: document.getElementById('visionTargetIndicator'),
 	visionAngle1Indicator: document.getElementById('visionAngle1Indicator'),
 	visionConnectionIndicator: document.getElementById('visionConnectionIndicator'),
 	visionDistanceIndicator: document.getElementById('visionDistanceIndicator'),
+
 	// Camera.
 	camera: document.getElementById('camera'),
-	// ...
-	powerCellCount: document.getElementById('powerCellCount'),
-	isAltShot : document.getElementById('Is Alt Shot'),
-	isReadyToShoot : document.getElementById('Is At Speed'),
+
+	// Subsystem info.
 	isSingulatorRunning : document.getElementById('Singulator'),
 	isInfeedRunning : document.getElementById('Infeed'),
 	isConveyorRunning : document.getElementById('Conveyor'),
+
+    // Shooter.
 	backRpm: document.getElementById('back-rpm'),
 	frontRpm: document.getElementById('front-rpm'),
 	kickerRpm: document.getElementById('kicker-rpm'),
 	angle: document.getElementById('angle'),
+
 	frontTarget: document.getElementById('front-target'),
 	backTarget: document.getElementById('back-target'),
 	kickerTarget: document.getElementById('kicker-target'),
 	angleTarget: document.getElementById('angle-target'),
+
 	shot: document.getElementById('shot'),
 	shooterIndex: document.getElementById('index')
 };
@@ -104,12 +70,12 @@ NetworkTables.addKeyListener('/SmartDashboard/Robot Build', (_, value) => {
 NetworkTables.addKeyListener('/SmartDashboard/Auton/options', (_, value) => {
 	openChooserWindowBtn.disabled = false;
 	openChooserWindowBtn.textContent = '= Click to open chooser window =';
-	
+
 	clearAutonButtons();
 
     // Dynamically build list of auton options.
     for (let i = 0; i < value.length; i++) {
-        addButton(value[i]);           
+        addButton(value[i]);
 	}
 
 	selectedAuton.value = '** Not selected **';
@@ -119,12 +85,6 @@ NetworkTables.addKeyListener('/SmartDashboard/Auton/default', (_, value) => {
 	setAutonDefault(value.toString());
 	selectedAuton.value = value;
 });
-
-NetworkTables.addKeyListener('/photonvision/C922_Pro_Stream_Webcam/targetPitch', (_, value) => {
-	console.log(`/photonvision/C922_Pro_Stream_Webcam/targetPitch -> ${value}`);
-	ui.targetRPM.textContent = value;
-});
-
 
 // ===== Auton starting side =====
 
@@ -136,7 +96,7 @@ NetworkTables.addKeyListener('/SmartDashboard/Side Start/options', (_, value) =>
 
     // Dynamically build list of auton options.
 	for (let i = 0; i < value.length; i++) {
-        addSideButton(value[i]);           
+        addSideButton(value[i]);
     }
 
 	selectedSide.value = '** Not selected **'
@@ -157,37 +117,40 @@ NetworkTables.addKeyListener('/SmartDashboard/Has Target', (_, value) => {
 	ui.visionTargetIndicator.textContent = value ? 'Target acquired.' : 'Target not acquired.';
 });
 
-NetworkTables.addKeyListener('/SmartDashboard/Target X Offset', (_, value) => {	
+NetworkTables.addKeyListener('/SmartDashboard/Target X Offset', (_, value) => {
 	ui.visionAngle1Indicator.textContent = Math.round(value * 100) / 100 + '\u00B0';
 });
 
-NetworkTables.addKeyListener('/SmartDashboard/Vision:Angle2InDegrees', (_, value) => {	
+NetworkTables.addKeyListener('/SmartDashboard/Vision:Angle2InDegrees', (_, value) => {
 	ui.visionAngle2Indicator.textContent = value + '\u00B0';
 });
 
-NetworkTables.addKeyListener('/SmartDashboard/Limelight Distance', (_, value) => {	
+NetworkTables.addKeyListener('/SmartDashboard/Limelight Distance', (_, value) => {
 	if(value < 600 && value != 0) {
 		ui.visionDistanceIndicator.textContent = (Math.round(value * 10) / 10) + 'ft';
 		if (value <= 600) {
 			ui.visionDistanceIndicator.style = affirmativeStyle;
-		} 
+		}
 	} else {
 		ui.visionDistanceIndicator.style = negativeStyle;
 		ui.visionDistanceIndicator.textContent = 'NO';
-	}	
+	}
 });
 
-NetworkTables.addKeyListener('/SmartDashboard/Vision:IsPingable', (_, value) => {	
+NetworkTables.addKeyListener('/SmartDashboard/Vision:IsPingable', (_, value) => {
 	ui.visionConnectionIndicator.style = value ? neutralStyle : negativeStyle;
 });
 
 
-// ===== POWERCELL COUNT ===== 
+// ===== POWERCELL COUNT =====
 
 
-	
+
 // ===== Shooter =====
 
+// NOTE: "Is At Speed" means that the actual shooter RPM is up to the target value.
+// It's not necessary anymore, as we have 3 separate motors and may not even use PIDV.
+// Remove later.
 NetworkTables.addKeyListener('/SmartDashboard/Is At Speed', (_, value) => {
 	// FOR REVIEW: What does "Is At Speed" actually refer to?
 	// For the time being, I will use the terminology "at the needed speed".
@@ -196,22 +159,6 @@ NetworkTables.addKeyListener('/SmartDashboard/Is At Speed', (_, value) => {
 	ui.isReadyToShoot.style = value ? affirmativeStyle : negativeStyle;
 	// Using a ternary operator, make the box read "Shoot" if we are at the needed speed, or "NOT READY." if not.
 	ui.isReadyToShoot.textContent = value ? 'Shoot!' : 'NOT READY.';
-});
-
-NetworkTables.addKeyListener('/SmartDashboard/Shot Distance', (_, value) => {
-	ui.shooterDist.textContent = value;
-});
-
-NetworkTables.addKeyListener('/SmartDashboard/Cell Count', (_, value) => {
-	ui.powerCellCount.textContent = value;
-});
-
-NetworkTables.addKeyListener('/SmartDashboard/Shooter Offset', (_, value) => {
-	ui.shooterOffset.textContent = value;
-});
-
-NetworkTables.addKeyListener('/SmartDashboard/Shooter Sensor Distance', (_, value) => {
-	ui.shooterSensorDistance.textContent = value;
 });
 
 NetworkTables.addKeyListener('/SmartDashboard/Angle', (_, value) => {
@@ -266,7 +213,7 @@ NetworkTables.addKeyListener('/SmartDashboard/Shooter Index', (_, value) => {
 
 // ===== Miscellaneous =====
 
-NetworkTables.addKeyListener('/SmartDashboard/CamSelection', (_, value) => {	
+NetworkTables.addKeyListener('/SmartDashboard/CamSelection', (_, value) => {
 	camera.setAttribute('src', value);
 });
 
